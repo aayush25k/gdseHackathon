@@ -6,7 +6,7 @@ function Jobcard(){
 
     const skills = ["Javascript","React","NodeJs"]
     const date1 = dayjs(Date.now());
-    const diffInDays=date1.diff('2023-28-10','day');
+    const diffInDays=date1.diff('2023-10-28','day');
     return(
 
     <>
