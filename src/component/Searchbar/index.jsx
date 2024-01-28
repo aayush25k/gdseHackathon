@@ -1,12 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { useState } from 'react';
+import { props } from "react";
+
+
+
+
 
 
 function Searchbar(){
+    const [jobCriteria,setJobCriteria]= useState({
+        title:"",
+        location:"",
+        experience:"",
+        type:""
+    })
+
+    const handleChange= (e) =>{
+        setJobCriteria((prevState) => ({
+            ...prevState,
+            [e.target.name]:e.target.value
+        }))
+    }
+    // console.log(jobCriteria);
+
+    const search= async() => {
+        await props.fetchJobCustom(jobCriteria);
+    }
+
     return(
     <>
         <div className='flex gap-4 my-10 justify-center px-10'>
-            <select className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
+            <select onChange={handleChange}name="title" value={jobCriteria.title}className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
                 <option value="" disabled hidden selected>Job Role</option>
                 <option value="iOS Developer">iOS Developer</option>
                 <option value="Frontend Developer">Frontend Developer</option>
@@ -16,30 +39,30 @@ function Searchbar(){
                 <option value="Data Scientist">Data Scientist</option>
             </select>
 
-            <select className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
+            <select onChange={handleChange} name="type" value={jobCriteria.type}className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
                 <option value="" disabled hidden selected>Job Type</option>
-                <option value="iOS Developer">Full Time</option>
-                <option value="Frontend Developer">Part Time</option>
-                <option value="Backend Developer">Contract</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Contract">Contract</option>
                 
             </select>
 
-            <select className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
+            <select onChange={handleChange} name="location" value={jobCriteria.location} className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
                 <option value="" disabled hidden selected>Location</option>
-                <option value="iOS Developer">Remote</option>
-                <option value="Frontend Developer">In-Office</option>
-                <option value="Backend Developer">Hybrid</option>
+                <option value="Remoter">Remote</option>
+                <option value="In-Office">In-Office</option>
+                <option value="Hybridr">Hybrid</option>
                 
             </select>
 
-            <select className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
+            <select onChange={handleChange} name="experience" value={jobCriteria.experience}className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
             <option value="" disabled hidden>Experience</option>
             <option value="Fresher">Fresher</option>
             <option value="Junior Level">Junior Level</option>
             <option value="Mid Level">Mid Level</option>
             <option value="Senior Level">Senior Level</option>
             </select>
-            <button className='w-64 bg-blue-500 text-white font-bold py-3 rounded-md'>Search</button>
+            <button onClick={search}className='w-64 bg-blue-500 text-white font-bold py-3 rounded-md'>Search</button>
 
             
             
