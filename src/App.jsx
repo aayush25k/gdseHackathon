@@ -2,6 +2,7 @@ import Navbar from "./component/Navbar"
 import Header from "./component/Header"
 import Searchbar from "./component/Searchbar"
 import Jobcard from "./component/Jobcard"
+import jobdata from "./jobdata"
 
 function App() {
   
@@ -11,7 +12,10 @@ function App() {
       <Navbar />
       <Header />
       <Searchbar />
-      <Jobcard />
+      {jobdata.map((job)=> (
+        <Jobcard key={job.id} {...job}/>
+      ))}
+      
     </div>
   )
 }
